@@ -1,0 +1,44 @@
+#!/usr/bin/env -S ansible-playbook --ask-become-pass
+---
+- name: Install cloudflared
+  hosts: "{{ target_hosts }}"
+  become: True
+  become_user: root
+  become_method: sudo
+  vars_prompt: 
+    - name: target_hosts
+      prompt: "Please hosts to run playbook on"
+      private: no
+    - name: target_architecture
+      prompt: "Please provide target architecture (amd64, arm, arm64, armhf)"
+      private: no
+  tasks:
+    - name: Download cloudflared
+      ansible.builtin.command: wget "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-{{ target_architecture }}" -O  "/root/cloudflared-linux"
+    - name: Copy cloduflared to bin directory
+      copy:
+        src: /root/cloudflared-linux
+        remote_src: true
+        dest: /usr/local/bin/cloudflared
+        mode: '0755'
+        owner: root
+        group: root
+    - name: Delete downloaded file
+      file:
+        path: /root/cloudflared-linux
+        state: absent
+    - name: Check if cloudflared is installed correctly
+      ansible.builtin.command: cloudflared -v
+    - name: Create updater script
+      copy:
+        content: |
+          #!/usr/bin/bash
+
+          wget "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-{{ target_architecture }}" -O "/root/cloudflared-linux"
+
+          mv /root/cloudflared-linux /usr/local/bin/cloudflared
+          chmod +x /usr/local/bin/cloudflared
+        dest: /usr/local/bin/cloudflared-updater
+        mode: '0755'
+        owner: root
+        group: root
