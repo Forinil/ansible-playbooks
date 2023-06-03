@@ -2,16 +2,16 @@
 ---
 - name: Install cloudflared
   hosts: "{{ target_hosts }}"
-  become: True
+  become: true
   become_user: root
   become_method: sudo
-  vars_prompt: 
+  vars_prompt:
     - name: target_hosts
       prompt: "Please hosts to run playbook on"
-      private: no
+      private: false
     - name: target_architecture
       prompt: "Please provide target architecture (amd64, arm, arm64, armhf)"
-      private: no
+      private: false
   tasks:
     - name: Download cloudflared
       ansible.builtin.get_url:
@@ -21,20 +21,22 @@
         owner: root
         group: root
     - name: Delete downloaded file
-      file:
+      ansible.builtin.file:
         path: /root/cloudflared-linux
         state: absent
     - name: Check if cloudflared is installed correctly
       ansible.builtin.command: cloudflared -v
       register: cloudflared_version
+      changed_when: false
     - name: Display cloduflared version
-      debug: msg="{{ cloudflared_version.stdout }}"
+      ansible.builtin.debug:
+        msg: "{{ cloudflared_version.stdout }}"
     - name: Install wget (dependenncy of the cloudflared-updater script)
       ansible.builtin.package:
         name: wget
         state: present
     - name: Create cloudflared-updater script
-      copy:
+      ansible.builtin.copy:
         content: |
           #!/usr/bin/bash
 
