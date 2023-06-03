@@ -29,7 +29,11 @@
       register: cloudflared_version
     - name: Display cloduflared version
       debug: msg="{{ cloudflared_version.stdout }}"
-    - name: Create updater script
+    - name: Install wget (dependenncy of the cloudflared-updater script)
+      ansible.builtin.package:
+        name: wget
+        state: present
+    - name: Create cloudflared-updater script
       copy:
         content: |
           #!/usr/bin/bash
