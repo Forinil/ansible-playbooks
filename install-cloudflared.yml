@@ -14,11 +14,8 @@
       private: no
   tasks:
     - name: Download cloudflared
-      ansible.builtin.command: wget "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-{{ target_architecture }}" -O  "/root/cloudflared-linux"
-    - name: Copy cloduflared to bin directory
-      copy:
-        src: /root/cloudflared-linux
-        remote_src: true
+      ansible.builtin.get_url:
+        url: "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-{{ target_architecture }}"
         dest: /usr/local/bin/cloudflared
         mode: '0755'
         owner: root
@@ -29,6 +26,9 @@
         state: absent
     - name: Check if cloudflared is installed correctly
       ansible.builtin.command: cloudflared -v
+      register: cloudflared_version
+    - name: Display cloduflared version
+      debug: msg="{{ cloudflared_version.stdout }}"
     - name: Create updater script
       copy:
         content: |
