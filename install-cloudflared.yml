@@ -20,10 +20,6 @@
         mode: '0755'
         owner: root
         group: root
-    - name: Delete downloaded file
-      ansible.builtin.file:
-        path: /root/cloudflared-linux
-        state: absent
     - name: Check if cloudflared is installed correctly
       ansible.builtin.command: cloudflared -v
       register: cloudflared_version
@@ -31,7 +27,7 @@
     - name: Display cloduflared version
       ansible.builtin.debug:
         msg: "{{ cloudflared_version.stdout }}"
-    - name: Install wget (dependenncy of the cloudflared-updater script)
+    - name: Install wget (dependency of the cloudflared-updater script)
       ansible.builtin.package:
         name: wget
         state: present
