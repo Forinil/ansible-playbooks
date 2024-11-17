@@ -4,7 +4,7 @@
   hosts: "{{ target_hosts }}"
   become: true
   become_user: root
-  become_method: sudo
+  become_method: ansible.builtin.sudo
   vars_prompt:
     - name: target_hosts
       prompt: "Please specify hosts to run playbook on"

@@ -4,13 +4,13 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-    - name: Code checkout
-      uses: actions/checkout@v4
-    - name: Lint Ansible Playbooks
-      uses: ansible/ansible-lint@v24.10.0
-      # optional (see below):
-      # with:
-      #   args: ""
-      #   setup_python: "true"
-      #   working_directory: ""
-      #   requirements_file: ""
+      - name: Code checkout
+        uses: actions/checkout@v4
+      - name: Lint Ansible Playbooks
+        uses: ansible/ansible-lint@v24.10.0
+        # optional (see below):
+        # with:
+        #   args: ""
+        #   setup_python: "true"
+        #   working_directory: ""
+        #   requirements_file: ""
