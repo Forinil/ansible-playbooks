@@ -1,10 +1,16 @@
 name: Ansible Lint
 on: [push, pull_request]
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
     steps:
     - name: Code checkout
-      uses: actions/checkout@v3.5.2
-    - name: Lint Ansible Playbook
-      uses: ansible/ansible-lint-action@v6.16.0
+      uses: actions/checkout@v4
+    - name: Lint Ansible Playbooks
+      uses: ansible/ansible-lint@v24.10.0
+      # optional (see below):
+      # with:
+      #   args: ""
+      #   setup_python: "true"
+      #   working_directory: ""
+      #   requirements_file: ""

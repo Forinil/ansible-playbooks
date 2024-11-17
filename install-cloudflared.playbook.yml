@@ -7,7 +7,7 @@
   become_method: sudo
   vars_prompt:
     - name: target_hosts
-      prompt: "Please hosts to run playbook on"
+      prompt: "Please specify hosts to run playbook on"
       private: false
     - name: target_architecture
       prompt: "Please provide target architecture (amd64, arm, arm64, armhf)"
