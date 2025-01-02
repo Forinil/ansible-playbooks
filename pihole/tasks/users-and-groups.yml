@@ -32,3 +32,11 @@
     user: kbotor
     state: present
     key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/id_rsa.pub') }}"
+
+- name: Copy id_rsa for user kbotor
+  ansible.builtin.copy:
+    src: "{{ lookup('env', 'HOME') + '/.ssh/id_rsa' }}"
+    dest: /home/kbotor/.ssh/id_rsa
+    owner: kbotor
+    group: kbotor
+    mode: '0600'

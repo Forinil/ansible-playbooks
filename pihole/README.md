@@ -8,8 +8,8 @@ ansible-galaxy install -r requirements.yml
 
 ### Run playbook
 
-Set up the host in /etc/ansible/hosts.yml - make sure to set its `architecture` variable to appropriate value.
-Available values can be found here: https://github.com/cloudflare/cloudflared/releases/latest
+Set up the host in /etc/ansible/hosts.yml - make sure to set its `architecture` and `pihole_config_branch` variables to appropriate value.
+Available values for `architecture` can be found here: https://github.com/cloudflare/cloudflared/releases/latest
 
 ```bash
 export TAILSCALE_KEY=[auth key]
