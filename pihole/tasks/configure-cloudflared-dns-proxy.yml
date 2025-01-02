@@ -31,7 +31,7 @@
     mode: 0755
 
 - name: Enable service cloudflared-proxy-dns and ensure it is not masked
-  ansible.builtin.systemd_service:
+  ansible.builtin.systemd:
     name: cloudflared-proxy-dns.service
     enabled: true
     masked: no
