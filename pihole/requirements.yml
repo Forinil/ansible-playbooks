@@ -1,14 +1,5 @@
 - name: tailscale
   src: https://github.com/artis3n/ansible-role-tailscale
 
-- name: php
-  src: geerlingguy.php
-
-- name: php-versions
-  src: geerlingguy.php-versions
-
-- name: apache
-  src: https://codeberg.org/ansible/apache/archive/main.tar.gz
-
 - name: pihole
-  src: https://codeberg.org/ansible/pihole/archive/main.tar.gz
+  src: https://github.com/Forinil/ansible-pihole

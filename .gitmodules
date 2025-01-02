@@ -1,0 +1,3 @@
+[submodule "ansible-pihole"]
+	path = ansible-pihole
+	url = ../ansible-pihole.git
