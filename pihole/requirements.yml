@@ -1,6 +1,12 @@
 - name: tailscale
   src: https://github.com/artis3n/ansible-role-tailscale
 
+- name: php
+  src: https://codeberg.org/ansible/php/archive/main.tar.gz
+
+- name: php-versions
+  src: https://codeberg.org/ansible/php-versions/archive/main.tar.gz
+
 - name: apache
   src: https://codeberg.org/ansible/apache/archive/main.tar.gz
 
