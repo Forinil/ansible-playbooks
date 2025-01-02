@@ -1,0 +1,12 @@
+---
+pihole:
+  setupVars:
+    webpassword: "{{ lookup('env', 'PIHOLE_PASSWORD') }}"
+    dns_servers:
+      - "127.0.0.1#5053"
+    listening: "all"
+    dnssec: "false"
+    dns_fqdn_required: "true"
+    dns_bogus_priv: "true"
+    temperatureunit: "C"
+    rev_server: "false"

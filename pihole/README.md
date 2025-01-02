@@ -13,5 +13,6 @@ Available values can be found here: https://github.com/cloudflare/cloudflared/re
 
 ```bash
 export TAILSCALE_KEY=[auth key]
+export PIHOLE_PASSWORD=[pihole password]
 ansible-playbook site.yml --extra-vars "target=[target]"
 ```
