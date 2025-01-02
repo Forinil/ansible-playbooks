@@ -1,4 +1,10 @@
 ---
+- name: Create /etc/dnsmasq.d directory
+  ansible.builtin.file:
+    path: /etc/dnsmasq.d
+    state: directory
+    mode: '0755'
+
 - name: Create /etc/dnsmasq.d/02-cobia-hydra.ts.net.conf file
   template:
     src: "./templates/02-cobia-hydra.ts.net.conf.j2"
