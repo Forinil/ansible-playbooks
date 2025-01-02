@@ -32,13 +32,6 @@
 - name: Configure git user email
   git_config:
     name: user.email
-    repo: /etc
-    scope: local
-    value: 'kbotor@gmail.com'
-
-- name: Configure git user email
-  git_config:
-    name: user.email
     scope: global
     value: 'kbotor@gmail.com'
 
