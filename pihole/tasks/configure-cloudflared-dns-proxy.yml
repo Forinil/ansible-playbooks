@@ -1,6 +1,6 @@
 - name: Download /usr/local/bin/cloudflared
   ansible.builtin.get_url:
-    url: https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm
+    url: https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-{{ architecture }}
     validate_certs: true
     dest: /usr/local/bin/cloudflared
     owner: cloudflared

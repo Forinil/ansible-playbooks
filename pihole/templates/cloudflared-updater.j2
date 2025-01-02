@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm
+wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-{{ architecture }}
 
 sudo systemctl stop cloudflared-proxy-dns
 
