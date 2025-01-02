@@ -1,0 +1,38 @@
+- name: Download /usr/local/bin/cloudflared
+  ansible.builtin.get_url:
+    url: https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm
+    dest: /usr/local/bin/cloudflared
+    owner: cloudflared
+    group: cloudflared
+    mode: '0755'
+
+- name: Create /etc/default/cloudflared-proxy-dns file
+  template:
+    src: "./templates/cloudflared-proxy-dns.j2"
+    dest: "/etc/default/cloudflared-proxy-dns"
+    owner: cloudflared
+    group: cloudflared
+    mode: 0644
+
+- name: Create /etc/systemd/system/cloudflared-proxy-dns.service file
+  template:
+    src: "./templates/cloudflared-proxy-dns.service.j2"
+    dest: "/etc/systemd/system/cloudflared-proxy-dns.service"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Create /etc/cron.weekly/cloudflared-updater file
+  template:
+    src: "./templates/cloudflared-updater.j2"
+    dest: "/etc/cron.weekly/cloudflared-updater"
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Enable service cloudflared-proxy-dns and ensure it is not masked
+  systemd_service:
+    name: cloudflared-proxy-dns.service
+    enabled: true
+    masked: no
+    state: started

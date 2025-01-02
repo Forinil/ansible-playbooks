@@ -1,0 +1,11 @@
+- name: Set timezone to Europe/Warsaw
+  community.general.timezone:
+    name: Europe/Warsaw
+
+- name: Create /etc/sysctl.d/local.conf file
+  template:
+    src: "./templates/local.conf.j2"
+    dest: "/etc/sysctl.d/local.conf"
+    owner: root
+    group: root
+    mode: 0644

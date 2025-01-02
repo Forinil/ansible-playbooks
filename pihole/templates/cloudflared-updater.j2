@@ -1,0 +1,15 @@
+#!/usr/bin/bash
+
+wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm
+
+sudo systemctl stop cloudflared-proxy-dns
+
+sudo mv ./cloudflared-linux-arm /usr/local/bin/cloudflared
+sudo chown cloudflared:cloudflared /usr/local/bin/cloudflared
+sudo chmod +x /usr/local/bin/cloudflared
+
+sudo systemctl start cloudflared-proxy-dns
+
+cloudflared -v
+
+sudo systemctl status --no-pager --full cloudflared-proxy-dns

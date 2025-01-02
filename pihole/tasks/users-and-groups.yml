@@ -1,0 +1,32 @@
+- name: Ensure group 'kbotor' exists
+  group:
+    name: kbotor
+    state: present
+
+- name: Ensure group 'cloudflared' exists
+  group:
+    name: cloudflared
+    state: present
+
+- name: Create the user 'kbotor'
+  user:
+    name: kbotor
+    group: kbotor
+    groups: users,adm,dialout,audio,video,plugdev,cdrom,games,input,render,sudo
+    shell: /bin/bash
+    home: /home/kbotor
+    password: $5$iqHfJZ3r3f$izpjS7fefZ9Ym5U0AAlWyGIWx4YaNPPQ5N3CxxmRT16
+    password_lock: false
+
+- name: Create the user 'cloudflared'
+  user: cloudflared
+  group: cloudflared
+  shell: /usr/sbin/nologin
+  system: true
+  create_home: false
+
+- name: Set authorized key for user kbotor
+  ansible.posix.authorized_key:
+    user: kbotor
+    state: present
+    key: "{{ lookup('file', lookup('env', 'HOME') + '.ssh/id_rsa.pub') }}"

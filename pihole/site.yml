@@ -1,0 +1,10 @@
+---
+- name: Provision Pi-hole server
+  hosts: all
+  # become: yes
+  # become_method: sudo
+  remote_user: root
+  tasks:
+    - import_tasks: tasks/system-settings.yml
+    - import_tasks: tasks/users-and-groups.yml
+    - import_tasks: tasks/configure-cloudflared-dns-proxy.yml
