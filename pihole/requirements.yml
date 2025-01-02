@@ -1,5 +1,8 @@
 - name: tailscale
   src: https://github.com/artis3n/ansible-role-tailscale
 
+- name: apache
+  src: https://codeberg.org/ansible/apache/archive/main.tar.gz
+
 - name: pihole
   src: https://codeberg.org/ansible/pihole/archive/main.tar.gz
