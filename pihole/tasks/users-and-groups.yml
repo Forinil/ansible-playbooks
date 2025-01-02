@@ -40,3 +40,11 @@
     owner: kbotor
     group: kbotor
     mode: '0600'
+
+- name: Copy id_rsa for user root
+  ansible.builtin.copy:
+    src: "{{ lookup('env', 'HOME') + '/.ssh/id_rsa' }}"
+    dest: /root/.ssh/id_rsa
+    owner: root
+    group: root
+    mode: '0600'
