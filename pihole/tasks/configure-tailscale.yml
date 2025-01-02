@@ -4,4 +4,4 @@
     name: tailscale
   vars:
     tailscale_authkey: "{{ lookup('env', 'TAILSCALE_KEY') }}"
-    tailscale_args: "--ssh"
+    tailscale_args: "--ssh --accept-dns=false"
