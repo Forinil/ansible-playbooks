@@ -2,4 +2,4 @@
   src: https://github.com/artis3n/ansible-role-tailscale
 
 - name: pihole
-  src: https://codeberg.org/ansible/pihole
+  src: git+https://codeberg.org/ansible/pihole.git,main
