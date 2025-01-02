@@ -29,6 +29,11 @@
     state: file
     mode: '0666'
 
+- name: Install pihole-cloudsync dependencies (apt packages)
+  ansible.builtin.apt:
+    name: "sqlite3"
+    state: present
+
 - name: Configure git user email
   git_config:
     name: user.email
