@@ -8,3 +8,4 @@
     - import_tasks: tasks/system-settings.yml
     - import_tasks: tasks/users-and-groups.yml
     - import_tasks: tasks/configure-cloudflared-dns-proxy.yml
+    - import_tasks: tasks/configure-tailscale.yml

@@ -1,3 +1,4 @@
+---
 - name: Ensure group 'kbotor' exists
   group:
     name: kbotor

@@ -1,0 +1,2 @@
+- name: tailscale
+  src: https://github.com/artis3n/ansible-role-tailscale

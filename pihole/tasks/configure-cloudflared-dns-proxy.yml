@@ -1,3 +1,4 @@
+---
 - name: Download /usr/local/bin/cloudflared
   ansible.builtin.get_url:
     url: https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-{{ architecture }}
