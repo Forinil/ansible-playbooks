@@ -4,9 +4,9 @@
     name: Europe/Warsaw
 
 - name: Create /etc/sysctl.d/local.conf file
-  template:
+  ansible.builtin.template:
     src: "./templates/local.conf.j2"
     dest: "/etc/sysctl.d/local.conf"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"

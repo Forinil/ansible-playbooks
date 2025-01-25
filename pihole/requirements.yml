@@ -1,5 +1,10 @@
-- name: tailscale
-  src: https://github.com/artis3n/ansible-role-tailscale
+---
+roles:
+  - name: pihole
+    src: https://github.com/Forinil/ansible-pihole
+  - name: tailscale
+    src: https://github.com/artis3n/ansible-role-tailscale
 
-- name: pihole
-  src: https://github.com/Forinil/ansible-pihole
+collections:
+  - name: ansible.posix
+  - name: community.general

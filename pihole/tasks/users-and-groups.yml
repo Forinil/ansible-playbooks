@@ -1,16 +1,16 @@
 ---
 - name: Ensure group 'kbotor' exists
-  group:
+  ansible.builtin.group:
     name: kbotor
     state: present
 
 - name: Ensure group 'cloudflared' exists
-  group:
+  ansible.builtin.group:
     name: cloudflared
     state: present
 
 - name: Create user 'kbotor'
-  user:
+  ansible.builtin.user:
     name: kbotor
     group: kbotor
     groups: users,adm,dialout,audio,video,plugdev,cdrom,games,input,render,sudo
@@ -20,7 +20,7 @@
     password_lock: false
 
 - name: Create user 'cloudflared'
-  user: 
+  ansible.builtin.user:
     name: cloudflared
     group: cloudflared
     shell: /usr/sbin/nologin

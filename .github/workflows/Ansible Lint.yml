@@ -7,10 +7,10 @@ jobs:
       - name: Code checkout
         uses: actions/checkout@v4
       - name: Lint Ansible Playbooks
-        uses: ansible/ansible-lint@v24.10.0
+        uses: ansible/ansible-lint@v25.1.0
         # optional (see below):
-        # with:
+        with:
         #   args: ""
         #   setup_python: "true"
         #   working_directory: ""
-        #   requirements_file: ""
+          requirements_file: "pihole/requirements.yml"
