@@ -1,0 +1,44 @@
+---
+- name: Install Proxmox VE service checker
+  hosts: "{{ target_hosts }}"
+  become: true
+  become_user: root
+  become_method: ansible.builtin.sudo
+  vars_prompt:
+    - name: target_hosts
+      prompt: "Please specify Proxmox VE hosts to run playbook on"
+      private: false
+  tasks:
+    - name: Create check-service script
+      ansible.builtin.copy:
+        content: |
+          #!/bin/bash
+
+          # List of services to monitor
+          #SERVICES=("pve-cluster" "corosync" "pvestatd" "pveproxy" "pvedaemon")
+          SERVICES=("pve-cluster" "pvestatd" "pveproxy" "pvedaemon")
+
+          # Loop through each service and check its status
+          for SERVICE in "${SERVICES[@]}"; do
+              if ! systemctl is-active --quiet "$SERVICE"; then
+                  echo "Service $SERVICE is not running. Restarting..."
+                  systemctl restart "$SERVICE"
+                  if systemctl is-active --quiet "$SERVICE"; then
+                      echo "Service $SERVICE restarted successfully."
+                  else
+                      echo "Failed to restart $SERVICE."
+                  fi
+              else
+                  echo "Service $SERVICE is running."
+              fi
+          done
+        dest: /usr/local/bin/check-service
+        mode: '0755'
+        owner: root
+        group: root
+    - name: Configure cron to run the script once a day
+      ansible.builtin.cron:
+        name: "Proxmox VE service check"
+        user: "root"
+        special_time: "daily"
+        job: "/usr/local/bin/check-service"

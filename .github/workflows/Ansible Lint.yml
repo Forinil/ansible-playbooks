@@ -21,3 +21,10 @@ jobs:
           # setup_python: "true"
           working_directory: "pihole"
           requirements_file: "requirements.yml"
+      - name: Lint proxmox-ve-service-checker playbook
+        uses: ansible/ansible-lint@v25.1.0
+        with:
+          # args: ""
+          # setup_python: "true"
+          working_directory: "proxmox-ve-service-checker"
+          # requirements_file: "requirements.yml"
