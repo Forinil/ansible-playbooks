@@ -2,15 +2,22 @@ name: Ansible Lint
 on: [push, pull_request]
 jobs:
   lint:
+    name: Lint playbooks
     runs-on: ubuntu-latest
     steps:
       - name: Code checkout
         uses: actions/checkout@v4
-      - name: Lint Ansible Playbooks
+      - name: Lint cloudflared playbook
         uses: ansible/ansible-lint@v25.1.0
-        # optional (see below):
         with:
-        #   args: ""
-        #   setup_python: "true"
-        #   working_directory: ""
-          requirements_file: "pihole/requirements.yml"
+          # args: ""
+          # setup_python: "true"
+          working_directory: "cloudflared"
+          # requirements_file: "requirements.yml"
+      - name: Lint pihole playbook
+        uses: ansible/ansible-lint@v25.1.0
+        with:
+          # args: ""
+          # setup_python: "true"
+          working_directory: "pihole"
+          requirements_file: "requirements.yml"
