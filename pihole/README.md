@@ -4,6 +4,7 @@
 
 ```bash
 ansible-galaxy install -r requirements.yml
+python -m pip install passlib
 ```
 
 ### Run playbook
@@ -14,5 +15,5 @@ Available values for `architecture` can be found here: [https://github.com/cloud
 Remote server must have SSH server installed and running and have a user with sudo permissions
 
 ```bash
-ansible-playbook site.yml
+ansible-playbook site.yml --ask-become-pass
 ```
