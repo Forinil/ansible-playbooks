@@ -3,7 +3,7 @@
 ## Install dependencies
 
 ```bash
-ansible-galaxy install -r requirements.yml
+ansible-galaxy install --force -r requirements.yml
 python -m pip install passlib
 ```
 
