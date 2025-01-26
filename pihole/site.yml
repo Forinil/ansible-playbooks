@@ -1,9 +1,9 @@
 ---
 - name: Provision Pi-hole server
   hosts: '{{ target_hosts }}'
-  # become: yes
-  # become_method: sudo
-  remote_user: root
+  become: true
+  become_user: root
+  become_method: ansible.builtin.sudo
   vars_prompt:
     - name: target_hosts
       prompt: "Please specify hosts to run playbook on"
