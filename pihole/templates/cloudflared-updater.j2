@@ -4,7 +4,7 @@ wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudfla
 
 sudo systemctl stop cloudflared-proxy-dns
 
-sudo mv ./cloudflared-linux-arm /usr/local/bin/cloudflared
+sudo mv ./cloudflared-linux-{{ architecture }} /usr/local/bin/cloudflared
 sudo chown cloudflared:cloudflared /usr/local/bin/cloudflared
 sudo chmod +x /usr/local/bin/cloudflared
 
