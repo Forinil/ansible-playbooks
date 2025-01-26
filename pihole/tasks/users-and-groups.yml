@@ -1,7 +1,7 @@
 ---
-- name: Ensure group 'kbotor' exists
+- name: Create group '{{  admin_user }}'
   ansible.builtin.group:
-    name: kbotor
+    name: "{{  admin_user }}"
     state: present
 
 - name: Ensure group 'cloudflared' exists
@@ -9,14 +9,14 @@
     name: cloudflared
     state: present
 
-- name: Create user 'kbotor'
+- name: Create user '{{  admin_user }}'
   ansible.builtin.user:
-    name: kbotor
-    group: kbotor
+    name: "{{  admin_user }}"
+    group: "{{  admin_user }}"
     groups: users,adm,dialout,audio,video,plugdev,cdrom,games,input,render,sudo
     shell: /bin/bash
-    home: /home/kbotor
-    password: $5$iqHfJZ3r3f$izpjS7fefZ9Ym5U0AAlWyGIWx4YaNPPQ5N3CxxmRT16
+    home: "{{ '/home/' + admin_user }}"
+    password: "{{ admin_password | ansible.builtin.password_hash }}"
     password_lock: false
 
 - name: Create user 'cloudflared'
@@ -27,23 +27,23 @@
     system: true
     create_home: false
 
-- name: Set authorized key for user kbotor
+- name: Set authorized key for user '{{  admin_user }}'
   ansible.posix.authorized_key:
-    user: kbotor
+    user: "{{  admin_user }}"
     state: present
     key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/id_rsa.pub') }}"
 
-- name: Copy id_rsa for user kbotor
+- name: Copy id_rsa for user '{{  admin_user }}'
   ansible.builtin.copy:
-    src: "{{ lookup('env', 'HOME') + '/.ssh/id_rsa' }}"
-    dest: /home/kbotor/.ssh/id_rsa
-    owner: kbotor
-    group: kbotor
+    src: "{{ admin_ssh_key }}"
+    dest: "{{ '/home/' + admin_user + '/.ssh/id_rsa' }}"
+    owner: "{{  admin_user }}"
+    group: "{{  admin_user }}"
     mode: '0600'
 
 - name: Copy id_rsa for user root
   ansible.builtin.copy:
-    src: "{{ lookup('env', 'HOME') + '/.ssh/id_rsa' }}"
+    src: "{{ admin_ssh_key }}"
     dest: /root/.ssh/id_rsa
     owner: root
     group: root

@@ -3,5 +3,5 @@
   ansible.builtin.include_role:
     name: tailscale
   vars:
-    tailscale_authkey: "{{ lookup('env', 'TAILSCALE_KEY') }}"
+    tailscale_authkey: "{{ tailscale_key }}"
     tailscale_args: "--ssh --accept-dns=false"

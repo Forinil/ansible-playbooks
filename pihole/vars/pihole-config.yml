@@ -1,7 +1,7 @@
 ---
 pihole:
   setupVars:
-    webpassword: "{{ lookup('env', 'PIHOLE_PASSWORD') }}"
+    webpassword: "{{ pihole_password }}"
     dns_servers:
       - "127.0.0.1#5053"
     listening: "all"

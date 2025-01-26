@@ -1,9 +1,31 @@
 ---
 - name: Provision Pi-hole server
-  hosts: '{{ target | default([]) }}'
+  hosts: '{{ target_hosts }}'
   # become: yes
   # become_method: sudo
   remote_user: root
+  vars_prompt:
+    - name: target_hosts
+      prompt: "Please specify hosts to run playbook on"
+      private: false
+    - name: admin_user
+      prompt: "Please specify the name of the admin user to be created"
+      private: false
+    - name: admin_password
+      prompt: "Please specify the password of the admin user to be created"
+      private: true
+    - name: admin_ssh_key
+      prompt: "Please specify the location of the admin's SSH key"
+      private: false
+    - name: pihole_password
+      prompt: "Please specify the Pi-hole web GUI password"
+      private: true
+    - name: tailscale_network_domain
+      prompt: "Please specify Tailscale network domain"
+      private: false
+    - name: tailscale_key
+      prompt: "Please specify Tailscale authentication key"
+      private: true
   vars_files:
     - vars/pihole-config.yml
   tasks:
