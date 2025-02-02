@@ -21,7 +21,7 @@
         dest: /bin/pve-mod-gui-sensors
         mode: '0755'
     - name: Flush handlers
-      meta: flush_handlers    
+      ansible.builtin.meta: flush_handlers
     - name: Run installation script
       ansible.builtin.command:
         argv:
@@ -29,6 +29,6 @@
           - "install"
   handlers:
     - name: Detect sensors
-      ansible.builtin.command: 
+      ansible.builtin.command:
         argv:
           - "sensors-detect"
