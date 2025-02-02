@@ -26,5 +26,5 @@ jobs:
         with:
           # args: ""
           # setup_python: "true"
-          working_directory: "proxmox-ve-service-checker"
+          working_directory: "proxmox-ve/service-checker"
           # requirements_file: "requirements.yml"
