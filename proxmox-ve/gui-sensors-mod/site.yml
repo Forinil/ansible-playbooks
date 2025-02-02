@@ -30,5 +30,5 @@
   handlers:
     - name: Detect sensors
       ansible.builtin.command: 
-      argv:
-        - "sensors-detect"
+        argv:
+          - "sensors-detect"
