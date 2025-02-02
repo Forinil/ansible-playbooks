@@ -20,6 +20,8 @@
         url: https://github.com/Meliox/PVE-mods/raw/refs/heads/main/pve-mod-gui-sensors.sh
         dest: /bin/pve-mod-gui-sensors
         mode: '0755'
+    - name: Flush handlers
+      meta: flush_handlers    
     - name: Run installation script
       ansible.builtin.command:
         argv:
