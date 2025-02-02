@@ -1,0 +1,32 @@
+---
+- name: Install Proxmox VE GUI sensors mod
+  hosts: "{{ target_hosts }}"
+  become: true
+  become_user: root
+  become_method: ansible.builtin.sudo
+  vars_prompt:
+    - name: target_hosts
+      prompt: "Please specify Proxmox VE hosts to run playbook on"
+      private: false
+  tasks:
+    - name: Install dependencies (apt packages)
+      ansible.builtin.apt:
+        name: "lm-sensors"
+        state: present
+      notify:
+        - Detect sensors
+    - name: Download installation script
+      ansible.builtin.get_url:
+        url: https://github.com/Meliox/PVE-mods/raw/refs/heads/main/pve-mod-gui-sensors.sh
+        dest: /bin/pve-mod-gui-sensors
+        mode: '0755'
+    - name: Run installation script
+      ansible.builtin.command:
+        argv:
+          - "/bin/pve-mod-gui-sensors"
+          - "install"
+  handlers:
+    - name: Detect sensors
+      ansible.builtin.command: 
+      argv:
+        - "sensors-detect"
